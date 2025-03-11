@@ -1,5 +1,10 @@
 import React from 'react';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import Home from './components/pages/Home';
+import RulesPage from "./components/pages/RulesPage";
+import Game from "./components/pages/Game";
+import Ranking from "./components/pages/Ranking";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 
@@ -9,8 +14,12 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route path='/' exact />
+          <Route path='/' element={<Home />} />
+          <Route path='/rules' element={<RulesPage />} />
+          <Route path='/game' element={<Game />} />
+          <Route path='/ranking' element={<Ranking />} />
         </Routes>
+        < Footer />
       </Router>
     </>
   );

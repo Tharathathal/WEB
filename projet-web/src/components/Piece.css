@@ -1,0 +1,22 @@
+.pieces {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2%;
+}
+
+.black {    
+    color: rgb(46, 25, 4);
+}
+
+.white {    
+    color: rgb(255, 179, 102);
+}
+
+.short {
+    font-size: 1.1rem;
+}
+
+.tall {
+    font-size: 2rem;
+}
