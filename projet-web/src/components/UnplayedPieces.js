@@ -4,7 +4,7 @@ import "./UnplayedPieces.css";
 
 const UnplayedPieces = ({ pieces, onSelectPiece, selectedPiece }) => {
   return (
-    <div className="pieces-tray">
+    <div className="unplayed-pieces">
       {Object.entries(pieces).map(([id, piece]) => (
         <div
           key={id}

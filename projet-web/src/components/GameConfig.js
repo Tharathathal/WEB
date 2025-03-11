@@ -14,7 +14,7 @@ export const initialPieces = {
     "13": { color: "white", shape: "circle", height: "tall", hollow: "filled" },
     "14": { color: "white", shape: "circle", height: "tall", hollow: "hollow" },
     "15": { color: "white", shape: "circle", height: "short", hollow: "filled" },
-    "16": { color: "white", shape: "circle", height: "short", hollow: "hollow" },
+    "16": { color: "white", shape: "circle", height: "short", hollow: "hollow" }
 };
 
 export const initialBoard = Array(4).fill(null).map(() => Array(4).fill(null));
