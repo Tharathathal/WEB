@@ -1,6 +1,6 @@
 import React from "react";
 import Piece from "./Piece";
-import "./UnplayedPieces.css";
+import "../App.css";
 
 const UnplayedPieces = ({ pieces, onSelectPiece, selectedPiece }) => {
   return (

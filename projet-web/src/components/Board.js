@@ -1,6 +1,6 @@
 import React from "react";
 import Piece from "./Piece";
-import "./Board.css";
+import "../App.css";
 
 const Board = ({ board, onPlacePiece }) => {
   return (

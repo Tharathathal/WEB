@@ -1,5 +1,5 @@
 import React from 'react';
-import './Piece.css';
+import '../App.css';
 
 const Piece = ({ color, shape, height, hollow }) => {
   let iconClass = "";
