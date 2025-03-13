@@ -5,37 +5,86 @@ import { initialPieces, initialBoard } from "../GameConfig";
 import { useLocation } from "react-router-dom";
 
 const Game = () => {
-  const [board, setBoard] = useState(initialBoard);
+  const location = useLocation();
+  const { player1, player2 } = location.state || { player1: "Player 1", player2: "Player 2" };
+
+  const [board, setBoard] = useState(initialBoard.map(row => [...row]));
   const [pieces, setPieces] = useState(initialPieces);
   const [selectedPiece, setSelectedPiece] = useState(null);
-  const location = useLocation();
-  const { player1, player2 } = location.state || { player1: "Player 1", player2: "Player 2" }; 
+  const [currentPlayer, setCurrentPlayer] = useState(player1);
+  const [gamePhase, setGamePhase] = useState("pick");
 
+  const checkWin = (board, row, col) => {
+    if (!board[row][col]) return false;
+  
+    const piece = board[row][col];
+    const properties = ["color", "shape", "height", "hollow"];
+  
+    const checkLine = (line) => {
+      return properties.some((prop) => 
+        line.every((p) => p && p[prop] === line[0][prop])
+      );
+    };
+  
+    const rowPieces = board[row];
+    const colPieces = board.map((r) => r[col]);
+    const mainDiagonal = board.map((r, i) => board[i][i]);
+    const antiDiagonal = board.map((r, i) => board[i][board.length - 1 - i]);
+  
+    return (
+      checkLine(rowPieces) || 
+      checkLine(colPieces) || 
+      (row === col && checkLine(mainDiagonal)) || 
+      (row + col === board.length - 1 && checkLine(antiDiagonal))
+    );
+  };
+  
 
-  // Select a piece from the tray
   const handleSelectPiece = (pieceId) => {
-    setSelectedPiece(pieceId);
+    if (gamePhase === "win") return;
+
+    if (gamePhase === "pick") {
+      setSelectedPiece(pieceId);
+      setGamePhase("place");
+    } else {
+      alert("Pose la pièce sur le plateau !")
+    }
   };
 
-  // Place the selected piece on the board
   const handlePlacePiece = (row, col) => {
-    if (!selectedPiece) return; // Ensure a piece is selected
+    if (gamePhase === "win") return;
+    if (!selectedPiece) return;
 
     const newBoard = [...board];
-    newBoard[row][col] = pieces[selectedPiece]; // Place selected piece
+    newBoard[row][col] = pieces[selectedPiece];
     setBoard(newBoard);
 
     const updatedPieces = { ...pieces };
-    delete updatedPieces[selectedPiece]; // Remove piece from tray
+    delete updatedPieces[selectedPiece];
     setPieces(updatedPieces);
 
-    setSelectedPiece(null); // Reset selection
+    if (checkWin(newBoard, row,col)){
+      setGamePhase("win");
+      return;
+    }
+
+    setSelectedPiece(null);
+    setGamePhase("pick");
+    setCurrentPlayer(currentPlayer === player1 ? player2 : player1);
   };
 
   return (
     <div className="game">
       <h1>Quarto</h1>
       <UnplayedPieces pieces={pieces} onSelectPiece={handleSelectPiece} selectedPiece={selectedPiece} />
+      <div className="game-message">
+        {gamePhase === "win"
+          ? `${currentPlayer} a gagné ! Fin de la partie`
+          : gamePhase === "pick"
+            ? `${currentPlayer}, choisis une pièce à donner à ${currentPlayer === player1 ? player2 : player1}`
+            : `${currentPlayer === player1 ? player2 : player1}, place ta pièce sur le plateau`
+        }
+      </div>
       <Board board={board} onPlacePiece={handlePlacePiece} />
     </div>
   );

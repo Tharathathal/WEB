@@ -151,10 +151,6 @@ h1 {
 .footer {
   background: rgb(46, 25, 4);
   height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.2rem;
   margin-top: 5%;
 }
 
@@ -187,7 +183,7 @@ h1 {
 
 .presentation > p br {
   display: block;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 }
 
 
@@ -278,6 +274,7 @@ h1 {
 
 .player-input {
   margin: 0.5rem;
+  color: rgb(46, 25, 4);
   font-size: 1.5rem;
   text-align: center;
   border-color: rgb(46, 25, 4);
@@ -370,5 +367,18 @@ h1 {
 }
 
 .piece-slot.selected {
-  border: 2px solid gold;
+  border: 2px solid rgb(255, 128, 0);
+}
+
+@media screen and (max-width: 650px) {
+  .unplayed-pieces {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* GAME MESSAGES */
+.game-message{
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 2% 50px;
 }

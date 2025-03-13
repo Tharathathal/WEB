@@ -9,12 +9,7 @@ const PlayersNames = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (player1.trim() && player2.trim()) {
-      navigate("/game", { state: { player1, player2 } });
-    } else {
-      alert("Please enter both player names.");
-    }
+    navigate("/game", { state: { player1, player2 } });
   };
 
   return (
