@@ -9,6 +9,7 @@ import Ranking from "./components/pages/Ranking";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 
+/* Application */
 function App() {
   return (
     <>

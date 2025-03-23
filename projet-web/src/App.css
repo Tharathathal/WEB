@@ -182,8 +182,9 @@ h1 {
 }
 
 .presentation > p br {
+  content: "";
   display: block;
-  margin-bottom: 3rem;
+  margin: 3rem;
 }
 
 
@@ -310,19 +311,19 @@ h1 {
   margin: 2%;
 }
 
-.black {    
+.noire {    
   color: rgb(46, 25, 4);
 }
 
-.white {    
+.blanche {    
   color: rgb(211, 166, 120);
 }
 
-.short {
+.petite {
   font-size: 1.1rem;
 }
 
-.tall {
+.grande {
   font-size: 2rem;
 }
 

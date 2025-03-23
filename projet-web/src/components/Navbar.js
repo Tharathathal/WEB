@@ -2,9 +2,10 @@ import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import '../App.css';
 
+/* Bar de navigation */
 function Navbar() {
+    /* Définition des variables */
     const [click, setClick] = useState(false);
-    
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
 
@@ -16,6 +17,7 @@ function Navbar() {
                     Quarto
                     <i class='fas fa-chess-board' />
                 </Link>
+                {/* Menu rétractable */}
                 <div className='menu-icon' onClick={handleClick}>
                     <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
                 </div>

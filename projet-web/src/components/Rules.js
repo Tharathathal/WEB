@@ -1,6 +1,7 @@
 import React from 'react';
 import '../App.css';
 
+/* Explication des règles du jeu */
 function Rules() {
     return (
     <>

@@ -1,13 +1,14 @@
 import React from 'react';
 import '../App.css';
 
+/* Gestion de l'affichage des pièces en fonction de leurs caractéristiques */
 const Piece = ({ color, shape, height, hollow }) => {
   let iconClass = "";
-  if (shape === "square" && hollow === "filled") {
+  if (shape === "carrée" && hollow === "pleine") {
     iconClass = "fas fa-square";
-  } else if (shape === "square" && hollow === "hollow") {
+  } else if (shape === "carrée" && hollow === "creuse") {
     iconClass = "far fa-square";
-  } else if (shape === "circle" && hollow === "filled") {
+  } else if (shape === "ronde" && hollow === "pleine") {
     iconClass = "fas fa-circle";
   } else {
     iconClass = "far fa-circle";
@@ -16,7 +17,7 @@ const Piece = ({ color, shape, height, hollow }) => {
   return (
     <div
       className={`piece ${color} ${shape} ${height} ${hollow}`}
-      title={`Piece: ${color}, ${shape}, ${height}, ${hollow}`}
+      title={`Pièce: ${color}, ${shape}, ${height}, ${hollow}`}
     >
       <i className={iconClass} />
     </div>

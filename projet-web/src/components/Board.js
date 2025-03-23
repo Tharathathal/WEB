@@ -2,6 +2,7 @@ import React from "react";
 import Piece from "./Piece";
 import "../App.css";
 
+/* Affichage et gestion du plateau */
 const Board = ({ board, onPlacePiece }) => {
   return (
     <div className="board">
@@ -12,7 +13,7 @@ const Board = ({ board, onPlacePiece }) => {
             className="board-cell"
             onClick={() => onPlacePiece(rowIndex, colIndex)}
           >
-            {piece && <Piece {...piece} />} {/* Show piece if placed */}
+            {piece && <Piece {...piece} />} {/* Affiche les pièces sur le plateau*/}
           </div>
         ))
       )}
