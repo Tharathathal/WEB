@@ -50,7 +50,7 @@ const Game = () => {
       setSelectedPiece(pieceId);
       setGamePhase("place");
     } else {
-      alert("Pose la pièce sur le plateau !")
+      return;
     }
   };
 
@@ -58,6 +58,7 @@ const Game = () => {
   const handlePlacePiece = (row, col) => {
     if (gamePhase === "win") return;
     if (!selectedPiece) return;
+    if (board[row][col] !== null) return;
 
     const newBoard = [...board];
     newBoard[row][col] = pieces[selectedPiece];
