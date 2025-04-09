@@ -4,7 +4,7 @@ import Footer from './components/Footer';
 import Home from './components/pages/Home';
 import RulesPage from "./components/pages/RulesPage";
 import PlayersNames from './components/pages/PlayersNames';
-import Game from "./components/pages/Game";
+import GamePage from "./components/pages/GamePage";
 import Ranking from "./components/pages/Ranking";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
@@ -19,7 +19,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/rules' element={<RulesPage />} />
           <Route path='/players' element={<PlayersNames />} />
-          <Route path='/game' element={<Game />} />
+          <Route path='/game' element={<GamePage />} />
           <Route path='/ranking' element={<Ranking />} />
         </Routes>
         < Footer />

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Board from "../Board";
-import UnplayedPieces from "../UnplayedPieces";
-import { initialPieces, initialBoard } from "../GameConfig";
+import Board from "./Board";
+import UnplayedPieces from "./UnplayedPieces";
+import { initialPieces, initialBoard } from "./GameConfig";
 import { useLocation } from "react-router-dom";
 
 /* Page où se déroule la partie */
@@ -21,7 +21,6 @@ const Game = () => {
   const checkWin = (board, row, col) => {
     if (!board[row][col]) return false;
   
-    const piece = board[row][col];
     const properties = ["color", "shape", "height", "hollow"];
   
     const checkLine = (line) => {
