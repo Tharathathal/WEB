@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Board from "./Board";
 import UnplayedPieces from "./UnplayedPieces";
 import { initialPieces, initialBoard } from "./GameConfig";
@@ -16,6 +16,8 @@ const Game = () => {
   const [selectedPiece, setSelectedPiece] = useState(null);
   const [currentPlayer, setCurrentPlayer] = useState(player1);
   const [gamePhase, setGamePhase] = useState("pick");
+  const [moveCount, setMoveCount] = useState(1);
+  const startTime = useRef(Date.now());
 
   /* Fonction vérifiant les conditions de victoire */
   const checkWin = (board, row, col) => {
@@ -70,11 +72,33 @@ const Game = () => {
 
     if (checkWin(newBoard, row,col)){
       setGamePhase("win");
+      const endTime = Date.now(); // End time when the game ends
+      const duration = endTime - startTime.current; // Duration in milliseconds
+
+      // Envoie les résultats à la BDD
+      fetch('http://localhost:5000/api/games', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          player1,
+          player2,
+          winner: currentPlayer,
+          moveCount,
+          duration
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => console.log('Partie enregistrée !', data))
+        .catch((err) => console.error('Erreur de sauvegarde :', err));
+      
       return;
     }
 
     setSelectedPiece(null);
     setGamePhase("pick");
+    setMoveCount(prev => prev + 1);
     setCurrentPlayer(currentPlayer === player1 ? player2 : player1);
   };
 
@@ -84,7 +108,7 @@ const Game = () => {
       <UnplayedPieces pieces={pieces} onSelectPiece={handleSelectPiece} selectedPiece={selectedPiece} />
       <div className="game-message">
         {gamePhase === "win"
-          ? `${currentPlayer === player1 ? player2 : player1} a gagné ! Fin de la partie`
+          ? `${currentPlayer === player1 ? player2 : player1} a gagné en ${moveCount} coups ! Fin de la partie`
           : gamePhase === "pick"
             ? `${currentPlayer}, choisis une pièce à donner à ${currentPlayer === player1 ? player2 : player1}`
             : `${currentPlayer === player1 ? player2 : player1}, place ta pièce sur le plateau`
