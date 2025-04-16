@@ -4,7 +4,6 @@ import "../../App.css";
 
 /* Page de sélection des noms des joueurs avant la partie */
 const PlayersNames = () => {
-  /* Définition des variables */
   const [player1, setPlayer1] = useState("");
   const [player2, setPlayer2] = useState("");
   const navigate = useNavigate();

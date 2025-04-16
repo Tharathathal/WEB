@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react';
 
+/* Etablit le classement avec les données */
 const CreateRanking = () => {
   const [ranking, setRanking] = useState([]);
 
   useEffect(() => {
-    // Fetch data from the backend (assuming it returns an array of games with player1, player2, winner, moveCount, and duration)
+    // Récupération des données
     fetch('http://localhost:5000/api/games')
       .then((response) => response.json())
       .then((data) => {
-        // Sort games based on moveCount and, if they have the same number of moves, by duration
         const sortedGames = data
           .map((game) => ({
             ...game,
             moveCount: game.moveCount,
-            duration: game.duration, // duration in seconds or milliseconds
+            duration: game.duration,
           }))
           .sort((a, b) => {
             if (a.moveCount === b.moveCount) {
-              return a.duration - b.duration; // If moves are equal, use duration as a tiebreaker
+              return a.duration - b.duration; // Classification en durée si même nombre de coups
             }
-            return a.moveCount - b.moveCount; // Otherwise, sort by moveCount
+            return a.moveCount - b.moveCount; // Classification par nombre de coups
           });
 
         setRanking(sortedGames);

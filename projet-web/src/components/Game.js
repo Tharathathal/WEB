@@ -4,7 +4,7 @@ import UnplayedPieces from "./UnplayedPieces";
 import { initialPieces, initialBoard } from "./GameConfig";
 import { useLocation } from "react-router-dom";
 
-/* Page où se déroule la partie */
+/* Déroulement d'une partie */
 const Game = () => {
   /* Acquisition des noms des joueurs */
   const location = useLocation();
@@ -46,8 +46,6 @@ const Game = () => {
   
   /* Fonction gérant la phase du jeu à la sélection d'une pièce */
   const handleSelectPiece = (pieceId) => {
-    if (gamePhase === "win") return;
-
     if (gamePhase === "pick") {
       setSelectedPiece(pieceId);
       setGamePhase("place");
@@ -70,10 +68,11 @@ const Game = () => {
     delete updatedPieces[selectedPiece];
     setPieces(updatedPieces);
 
+    // Vérifie si fin de partie
     if (checkWin(newBoard, row,col)){
       setGamePhase("win");
-      const endTime = Date.now(); // End time when the game ends
-      const duration = endTime - startTime.current; // Duration in milliseconds
+      const endTime = Date.now();
+      const duration = endTime - startTime.current;
 
       // Envoie les résultats à la BDD
       fetch('http://localhost:5000/api/games', {
@@ -96,6 +95,7 @@ const Game = () => {
       return;
     }
 
+    // Si partie pas finie
     setSelectedPiece(null);
     setGamePhase("pick");
     setMoveCount(prev => prev + 1);

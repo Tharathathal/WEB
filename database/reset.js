@@ -5,7 +5,7 @@ const dbPath = path.resolve(__dirname, 'games.db');
 const db = new sqlite3.Database(dbPath);
 
 db.serialize(() => {
-  db.run(`DROP TABLE IF EXISTS games`);
+  db.run(`DROP TABLE IF EXISTS games`); // Détruit la BDD existante
   db.run(`
     CREATE TABLE games (
       id INTEGER PRIMARY KEY AUTOINCREMENT,

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 module.exports = (db) => {
-  // Create the games table if it doesn't exist
+  // Crée BDD si elle n'existe pas
   db.run(`
     CREATE TABLE IF NOT EXISTS games (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -14,7 +14,7 @@ module.exports = (db) => {
     )
   `);
 
-  // Route to save a game result
+  // Enregistre les données reçues
   router.post('/', (req, res) => {
     const { player1, player2, winner, moveCount, duration } = req.body;
 
@@ -39,7 +39,7 @@ module.exports = (db) => {
     stmt.finalize();
   });
 
-  // Route to fetch all games
+  // Récupère toutes les données à envoyer
   router.get('/', (req, res) => {
     db.all(`SELECT * FROM games ORDER BY moveCount ASC`, (err, rows) => {
       if (err) {

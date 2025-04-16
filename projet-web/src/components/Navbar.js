@@ -4,7 +4,6 @@ import '../App.css';
 
 /* Bar de navigation */
 function Navbar() {
-    /* Définition des variables */
     const [click, setClick] = useState(false);
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
@@ -15,7 +14,7 @@ function Navbar() {
             <div class="navbar-container">
                 <Link to='/' className='navbar-logo'>
                     Quarto
-                    <i class='fas fa-chess-board' />
+                    <i class='fas fa-chess-board' /> 
                 </Link>
                 {/* Menu rétractable */}
                 <div className='menu-icon' onClick={handleClick}>
